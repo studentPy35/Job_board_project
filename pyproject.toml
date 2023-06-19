@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "job-board-project"
+version = "0.1.0"
+description = ""
+authors = ["KaterinaPy35 <yakushka1308@mail.ru>"]
+readme = "README.md"
+packages = [{include = "job_board_project"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = "4.2.2"
+flake8 = "6.0.0"
+mypy = "1.3.0"
+deptry = "0.11.0"
+pylint = "2.17.4"
+isort = "5.12.0"
+black = "23.3.0"
+pre-commit = "3.3.3"
+requests = "2.31.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,23 @@
+{% extends "core/base.html" %}
+{% block content %}
+    <h1>Welcome to Jobboard</h1>
+    <h3>Vacancies list</h3>
+    <table border = "1">
+         <tr>
+             <th>Position</th>
+             <th>Company</th>
+             <th>Level</th>
+             <th>Minimum work experience</th>
+             <th>Salary</th>
+         </tr>
+         {% for vacancy in vacancy_list %}
+         <tr>
+             <td>{{ vacancy.position }}</td>
+             <td>{{ vacancy.company }}</td>
+             <td>{{ vacancy.level }}</td>
+             <td>{{ vacancy.experience }}</td>
+             <td>{{ vacancy.salary }}</td>
+         </tr>
+         {% endfor %}
+    </table>
+{% endblock content %}

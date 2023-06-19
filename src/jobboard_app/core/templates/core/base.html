@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% if title %}
+        <title>Jobboard - {{ title }}</title>
+    {% else %}
+        <title>Jobboard</title>
+    {% endif %}
+</head>
+<body>
+    <a href = "http://127.0.0.1:8000" target = "_self">Home</a> |<br />
+    <a href = "http://127.0.0.1:8000/add/" target = "_self">Add a vacancy</a> |<br />
+    <a href = "http://127.0.0.1:8000/companies/" target = "_self">Companies list</a><br /><br />
+    {% block content %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,27 @@
+{% extends "core/base.html" %}
+{% block content %}
+    <p>Fill following form to add vacancy:</p>
+    <br />
+    <form method="post">
+        {% csrf_token %}
+        Position: <input type = "text" name = "position" />
+        <br />
+        <br />
+        Company: <input type = "text" name = "company" />
+        <br />
+        <p>Level:
+        <select name = "level">
+            <option value = "Junior">Junior</option>
+            <option value = "Middle">Middle</option>
+            <option value = "Senior">Senior</option>
+        </select>
+        </p>
+        Minimum work experience: <input type = "text" name = "experience" />
+        <br />
+        <br />
+        Salary: <input type = "text" name = "salary" />
+        <br />
+        <br />
+        <button type="submit">Add vacancy</button>
+    </form>
+{% endblock content %}
