@@ -1,0 +1,12 @@
+{% extends "core/base.html" %}
+{% block content %}
+    <p>Add a review about {{ company.name|capfirst }}:</p>
+    <br />
+    <form action="{% url 'review' id %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <br />
+        <br />
+        <input type="submit" value="Add review" />
+    </form>
+{% endblock content %}

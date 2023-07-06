@@ -12,11 +12,19 @@
          </tr>
          {% for vacancy in vacancy_list %}
          <tr>
-             <td>{{ vacancy.position }}</td>
+             <td><a href = "{% url 'vacancy' vacancy.id %}">{{ vacancy.position }}</a></td>
              <td>{{ vacancy.company }}</td>
              <td>{{ vacancy.level }}</td>
              <td>{{ vacancy.experience }}</td>
-             <td>{{ vacancy.salary }}</td>
+             {% if not vacancy.salary_min and vacancy.salary_max %}
+                 <td>up to {{ vacancy.salary_max }}</td>
+             {% elif vacancy.salary_min and not vacancy.salary_max %}
+                 <td>from {{ vacancy.salary_min }}</td>
+             {% elif vacancy.salary_min and vacancy.salary_max %}
+                 <td>{{ vacancy.salary_min }} - {{ vacancy.salary_max }}</td>
+             {% elif not vacancy.salary_min and not vacancy.salary_max %}
+                 <td>not specified</td>
+             {% endif%}
          </tr>
          {% endfor %}
     </table>
