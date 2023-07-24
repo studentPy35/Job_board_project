@@ -1,5 +1,4 @@
 from .address import Address
-from .base import Base
 from .company import Company
 from .country import Country
 from .employee import Employee
@@ -24,7 +23,6 @@ from .vacancy import Vacancy
 from .work_format import WorkFormat
 
 __all__ = [
-    "Base",
     "Address",
     "Company",
     "Country",

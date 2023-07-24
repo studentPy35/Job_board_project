@@ -1,11 +1,17 @@
-{% extends "core/base.html" %}
+{% extends "base.html" %}
 {% block content %}
     <p>Fill following form to add a vacancy:</p>
     <br />
     <form action="{% url 'add_vacancy' %}" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <br />
+        <br>
+        {% for field in form %}
+            {{ field.errors }}
+            {{ field.label_tag }}
+            {{ field }}
+        <br>
+        <br>
+        {% endfor %}
         <br />
         <input type="submit" value="Add vacancy" />
     </form>

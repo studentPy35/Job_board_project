@@ -1,6 +1,6 @@
 from django.db import models
 
-from ..models import Base
+from src.jobboard_app.core.models.base import Base
 
 
 class Company(Base):
@@ -17,10 +17,10 @@ class Company(Base):
     description = models.TextField(null=True)
     email = models.EmailField(null=True)
     phone = models.CharField(max_length=25)
-    web_site = models.URLField(unique=True)
-    linkedin = models.URLField(unique=True)
-    twitter = models.URLField(unique=True)
-    instagram = models.URLField(unique=True)
+    web_site = models.URLField(null=True)
+    linkedin = models.URLField(null=True)
+    twitter = models.URLField(null=True)
+    instagram = models.URLField(null=True)
     address = models.OneToOneField(
         to="Address", on_delete=models.SET_NULL, null=True, related_name="companies", related_query_name="company"
     )

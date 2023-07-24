@@ -1,6 +1,6 @@
 from django.db import models
 
-from ..models import Base
+from src.jobboard_app.core.models.base import Base
 
 
 class Respond(Base):

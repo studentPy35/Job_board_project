@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>{{ vacancy.name }}</h1>
+    <p>Company name: {{ vacancy.company.name }}</p>
+    <p>Expected experience: {{ vacancy.expirience }}</p>
+    <p>Level: {{ vacancy.level.name }}</p>
+
+    {% if not vacancy.salary_min and vacancy.salary_max %}
+        <p>Salary: up to {{ vacancy.salary_max }}</p>
+    {% elif vacancy.salary_min and not vacancy.salary_max %}
+        <p>Salary: from {{ vacancy.salary_min }}</p>
+    {% elif vacancy.salary_min and vacancy.salary_max %}
+        <p>Salary: {{ vacancy.salary_min }} - {{ vacancy.salary_max }}</p>
+    {% elif not vacancy.salary_min and not vacancy.salary_max %}
+        <p>Salary: not specified</p>
+    {% endif%}
+    <p>Country / Countries:
+    {% for country in countries %}
+         {{ country.name }}
+    {% endfor %}
+    </p>
+    <p>Work formats:
+    {% for format in work_formats %}
+         {{ format.name}}
+    {% endfor %}
+    </p>
+    <p>Job application format:
+    {% for format in job_app_formats %}
+         {{ format.name }}
+    {% endfor %}
+    </p>
+    {% if vacancy.description %}
+        <p>Description: {{ vacancy.description }}</p>
+    {% endif %}
+    {% for tag in tags %}
+        # {{ tag.name }}
+    {% endfor %}
+
+
+{% endblock content %}

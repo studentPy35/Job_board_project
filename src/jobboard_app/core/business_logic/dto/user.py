@@ -1,4 +1,10 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from django.core.files import File
 
 
 @dataclass
@@ -9,7 +15,7 @@ class User:
     password: str
     email: str
     experience_description: str
-    resume: str
+    resume: File
     linkedin: str
     github: str
     salary_min: int | None
