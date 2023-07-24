@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Welcome to Jobboard</h1>
+    <form action="{% url 'index' %}" method="GET">
+        {% csrf_token %}
+        <br>
+        {% for field in form %}
+            {{ field.errors }}
+            {{ field.label_tag }}
+            {{ field }}
+        {% endfor %}
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <h3>Vacancies list</h3>
+    <table border = "1">
+         <tr>
+             <th>Position</th>
+             <th>Company</th>
+             <th>Level</th>
+             <th>Minimum work experience</th>
+             <th>Salary</th>
+         </tr>
+         {% for vacancy in vacancy_list %}
+         <tr>
+             <td><a href = "{% url 'vacancy' vacancy.id %}">{{ vacancy.name|capfirst }}</a></td>
+             <td>{{ vacancy.company.name|capfirst }}</td>
+             <td>{{ vacancy.level.name }}</td>
+             <td>{{ vacancy.expirience }} years</td>
+             {% if not vacancy.min_salary and vacancy.max_salary %}
+                 <td>up to {{ vacancy.max_salary }}</td>
+             {% elif vacancy.min_salary and not vacancy.max_salary %}
+                 <td>from {{ vacancy.min_salary }}</td>
+             {% elif vacancy.min_salary and vacancy.max_salary %}
+                 <td>{{ vacancy.min_salary }} - {{ vacancy.max_salary }}</td>
+             {% elif not vacancy.min_salary and not vacancy.max_salary %}
+                 <td>not specified</td>
+             {% endif%}
+         </tr>
+         {% endfor %}
+    </table>
+{% endblock content %}

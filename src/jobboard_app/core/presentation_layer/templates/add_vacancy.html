@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+    <p>Fill following form to add a vacancy:</p>
+    <br />
+    <form action="{% url 'add_vacancy' %}" method="post">
+        {% csrf_token %}
+        <br>
+        {% for field in form %}
+            {{ field.errors }}
+            {{ field.label_tag }}
+            {{ field }}
+        <br>
+        <br>
+        {% endfor %}
+        <br />
+        <input type="submit" value="Add vacancy" />
+    </form>
+{% endblock content %}
