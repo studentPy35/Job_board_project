@@ -1,0 +1,6 @@
+class CompanyAlreadyExistsError(Exception):
+    ...
+
+
+class CompanyDoesNotExistError(Exception):
+    ...

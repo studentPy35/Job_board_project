@@ -9,9 +9,10 @@
     {% endif %}
 </head>
 <body>
-    <a href = "http://127.0.0.1:8000" target = "_self">Home</a> |<br />
-    <a href = "http://127.0.0.1:8000/add/" target = "_self">Add a vacancy</a> |<br />
-    <a href = "http://127.0.0.1:8000/companies/" target = "_self">Companies list</a><br /><br />
+    <a href = "{% url 'index' %}">Home</a> |
+    <a href = "{% url 'add_vacancy' %}">Add a vacancy</a> |
+    <a href = "{% url 'companies' %}">Companies list</a> |
+    <a href = "{% url 'add_company' %}">Add a company</a><br /><br />
     {% block content %}{% endblock %}
 </body>
 </html>

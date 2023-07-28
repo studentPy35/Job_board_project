@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>{{ company.name|capfirst }}</h1>
+    {% if company.logo %}
+        <img src="{{ company.logo.url }}">
+    {% endif %}
+
+    <p>Employees number: {{ company.quantity_range.name }}</p>
+    {% if sector %}
+        <p>Sector: 
+        {% for sector in sectors %}
+            {{ sector.name }}
+        {% endfor %}
+        </p>
+    {% endif %}
+
+    {% if company.foundation_year %}
+        <p>Foundation year: {{ company.foundation_year }}</p>
+    {% endif %}
+
+    {% if company.description %}
+        <p>Description: {{ company.description }}</p>
+    {% endif %}
+
+    {% if company.email %}
+        <p>Email: {{ company.email }}</p>
+    {% endif %}
+
+    {% if company.phone %}
+        <p>Phone number: {{ company.phone }}</p>
+    {% endif %}
+
+    {% if company.web_site %}
+        <p>Web site: {{ company.web_site }}</p>
+    {% endif %}
+
+    {% if company.linkedin %}
+        <p>LinkedIn: {{ company.linkedin }}</p>
+    {% endif %}
+
+    {% if company.twitter %}
+        <p>Twitter: {{ company.twitter }}</p>
+    {% endif %}
+
+    {% if company.instagram %}
+        <p>Instagram: {{ company.instagram }}</p>
+    {% endif %}
+
+    <p>Address: </p>
+    {% if company.address.city %}
+        <p>City: {{ company.address.city }}</p>
+    {% endif %}
+
+    {% if company.address.country %}
+        <p>Country: {{ company.address.country }}</p>
+    {% endif %}
+
+    {% if company.address.street %}
+        <p>Street: {{ company.address.street }}</p>
+    {% endif %}
+
+    {% if company.address.house_number %}
+        <p>Home number: {{ company.address.house_number }}</p>
+    {% endif %}
+
+    {% if company.address.office_number %}
+        <p>Office number: {{ company.address.office_number }}</p>
+    {% endif %}
+
+    {% for item in vacancy.countries %}
+         {{ country.name }}
+    {% endfor %}
+
+{% endblock content %}

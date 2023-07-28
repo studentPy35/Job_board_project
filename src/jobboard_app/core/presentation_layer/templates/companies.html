@@ -1,4 +1,4 @@
-{% extends "core/base.html" %}
+{% extends "base.html" %}
 {% block content %}
     <h3>Companies list</h3>
     <table border = "1">
@@ -8,8 +8,8 @@
         </tr>
         {% for company in companies_list %}
         <tr>
-            <td>{{ company.name }}</td>
-            <td>{{ company.vacancies }}</td>
+            <td><a href = "{% url 'company' company.id %}">{{ company.name }}</a></td>
+            <td>{{ company.vacancy__count }}</td>
         </tr>
         {% endfor %}
     </table>
