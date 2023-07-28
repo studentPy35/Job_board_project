@@ -1,6 +1,5 @@
+from core.models.base import Base
 from django.db import models
-
-from src.jobboard_app.core.models.base import Base
 
 
 class Tag(Base):

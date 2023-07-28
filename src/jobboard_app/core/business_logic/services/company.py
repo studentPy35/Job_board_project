@@ -1,21 +1,22 @@
 from __future__ import annotations
 
-import uuid
+import logging
 from typing import TYPE_CHECKING
 
+from core.business_logic.errors import CompanyAlreadyExistsError
+from core.business_logic.services.common import (
+    change_file_size,
+    replace_file_name_to_uuid,
+)
+from core.models import Address, Company, EmployeesQuantityRange, Sector
 from django.db import IntegrityError, transaction
 from django.db.models import Count
 
-from src.jobboard_app.core.business_logic.errors import CompanyAlreadyExistsError
-from src.jobboard_app.core.models import (
-    Address,
-    Company,
-    EmployeesQuantityRange,
-    Sector,
-)
-
 if TYPE_CHECKING:
-    from src.jobboard_app.core.business_logic.dto import CompanyDTO
+    from core.business_logic.dto import CompanyDTO
+
+
+logger = logging.getLogger(__name__)
 
 
 def get_all_companies() -> list[Company]:
@@ -32,20 +33,20 @@ def get_company_by_id(id: int) -> tuple[Company, list[str]]:
         Company.objects.select_related("quantity_range", "address").prefetch_related("sector", "review").get(pk=id)
     )
     sectors = company.sector.all()
+    logger.info("Got company.", extra={"company_id": id, "company": company.name})
     return company, list(sectors)
 
 
 def create_company(received_data: CompanyDTO) -> None:
     try:
         with transaction.atomic():
-            sectors: list[str] = [sector.lower() for sector in received_data.sectors.split("\r\n")]
-            related_sectors = []
-            for sector in sectors:
-                try:
-                    received_sector = Sector.objects.get_or_create(name=sector)[0]
-                except IntegrityError:
-                    continue
-                related_sectors.append(received_sector)
+            if received_data.sectors:
+                sectors: list[str] = [sector.lower() for sector in received_data.sectors.split("\r\n")]
+                related_sectors = []
+                for sector in sectors:
+                    received_sector, created = Sector.objects.get_or_create(name=sector)
+                    if created:
+                        related_sectors.append(received_sector)
 
             quantity_range = EmployeesQuantityRange.objects.get(name=received_data.quantity_range)
             created_address = Address.objects.create(
@@ -55,9 +56,9 @@ def create_company(received_data: CompanyDTO) -> None:
                 house_number=received_data.house_number,
                 office_number=received_data.office_number,
             )
-            file_extension = received_data.logo.name.split(".")[-1]
-            file_name = str(uuid.uuid4())
-            received_data.logo.name = file_name + "." + file_extension
+            if received_data.logo:
+                received_data.logo = replace_file_name_to_uuid(file=received_data.logo)
+                received_data.logo = change_file_size(file=received_data.logo)
 
             created_company = Company.objects.create(
                 name=received_data.name,
@@ -74,6 +75,8 @@ def create_company(received_data: CompanyDTO) -> None:
             )
 
             created_company.sector.set(related_sectors)
+            logger.info("Company has been created.", extra={"company_name": received_data.name})
 
     except IntegrityError:
+        logger.error("Such company already exists.", extra={"company_name": received_data.name})
         raise CompanyAlreadyExistsError

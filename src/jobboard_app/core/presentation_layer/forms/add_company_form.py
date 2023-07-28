@@ -1,10 +1,6 @@
+from core.business_logic.services import get_quantity_range
+from core.presentation_layer.validators import ValidateFileExtension, ValidateFileSize
 from django import forms
-
-from src.jobboard_app.core.business_logic.services import get_quantity_range
-from src.jobboard_app.core.presentation_layer.validators import (
-    ValidateFileExtension,
-    ValidateFileSize,
-)
 
 
 class AddCompanyForm(forms.Form):
@@ -13,7 +9,7 @@ class AddCompanyForm(forms.Form):
         max_length=100,
         strip=True,
     )
-    quantity_range = forms.ChoiceField(choices=get_quantity_range(), label="Employees number", required=False)
+    quantity_range = forms.ChoiceField(choices=get_quantity_range(), label="Employees number")
     foundation_year = forms.IntegerField(label="Foundation year", required=False, min_value=1800)
     logo = forms.ImageField(
         label="Company's logo",

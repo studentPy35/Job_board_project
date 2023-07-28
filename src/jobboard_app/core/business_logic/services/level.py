@@ -1,4 +1,4 @@
-from src.jobboard_app.core.models import Level
+from core.models import Level
 
 
 def get_position_levels() -> list[tuple[str, str]]:

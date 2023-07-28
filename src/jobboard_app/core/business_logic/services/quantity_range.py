@@ -1,4 +1,4 @@
-from src.jobboard_app.core.models import EmployeesQuantityRange
+from core.models import EmployeesQuantityRange
 
 
 def get_quantity_range() -> list[tuple[str, str]]:

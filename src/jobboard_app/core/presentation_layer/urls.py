@@ -1,6 +1,5 @@
+from core.presentation_layer import views
 from django.urls import path
-
-from src.jobboard_app.core.presentation_layer import views
 
 urlpatterns = [
     path("", views.index, name="index"),

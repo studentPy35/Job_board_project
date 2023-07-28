@@ -2,18 +2,14 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from core.business_logic.dto import VacancyDTO
+from core.business_logic.errors import CompanyDoesNotExistError
+from core.business_logic.services import create_vacancy, get_vacancy_by_id
+from core.presentation_layer.forms import AddVacancyForm
 from dacite import from_dict
 from django.http import HttpResponseBadRequest
 from django.shortcuts import render
 from django.views.decorators.http import require_GET, require_http_methods
-
-from src.jobboard_app.core.business_logic.dto import VacancyDTO
-from src.jobboard_app.core.business_logic.errors import CompanyDoesNotExistError
-from src.jobboard_app.core.business_logic.services import (
-    create_vacancy,
-    get_vacancy_by_id,
-)
-from src.jobboard_app.core.presentation_layer.forms import AddVacancyForm
 
 if TYPE_CHECKING:
     from django.http import HttpRequest, HttpResponse

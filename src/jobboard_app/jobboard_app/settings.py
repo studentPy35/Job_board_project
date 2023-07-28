@@ -15,6 +15,8 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+from jobboard_app.logger_formatter import ContextFormatter
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -136,3 +138,36 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_URL = "/media/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR.parents[2], "media", "jobboard")
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "console_formatter": {
+            "()": ContextFormatter,
+            "format": "{asctime} - {levelname} - {name} - {module}:{funcName}:{lineno} - {message}",
+            "style": "{",
+        }
+    },
+    "handlers": {
+        "console_handler": {
+            "class": "logging.StreamHandler",
+            "level": os.environ["LOG_LEVEL"],
+            "formatter": "console_formatter",
+        }
+    },
+    "root": {
+        "level": os.environ["LOG_LEVEL"],
+        "handlers": ["console_handler"],
+    },
+    "loggers": {
+        "django": {
+            "level": os.environ["LOG_LEVEL"],
+            "handlers": ["console_handler"],
+        },
+        "PIL": {
+            "level": "WARNING",
+            "handlers": ["console_handler"],
+        },
+    },
+}

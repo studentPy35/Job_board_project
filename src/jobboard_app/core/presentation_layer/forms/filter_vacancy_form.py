@@ -1,6 +1,5 @@
+from core.business_logic.services import get_position_levels
 from django import forms
-
-from src.jobboard_app.core.business_logic.services import get_position_levels
 
 
 class FilterVacancyForm(forms.Form):

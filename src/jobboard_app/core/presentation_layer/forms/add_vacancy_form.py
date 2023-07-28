@@ -1,7 +1,6 @@
+from core.business_logic.services import get_position_levels
+from core.presentation_layer.validators import TagsValidator
 from django import forms
-
-from src.jobboard_app.core.business_logic.services import get_position_levels
-from src.jobboard_app.core.presentation_layer.validators import TagsValidator
 
 
 class AddVacancyForm(forms.Form):
