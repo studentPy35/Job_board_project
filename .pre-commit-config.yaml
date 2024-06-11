@@ -1,22 +1,23 @@
 repos:
--   repo: https://github.com/pycqa/flake8
-    rev: ''
-    hooks:
-    -   id: flake8
-        additional_dependencies: [flake8-builtins, pep8-naming, flake8-comments]
 -   repo: https://github.com/PyCQA/isort
     rev: 5.12.0
     hooks:
-    -   id: isort
--   repo: https://github.com/psf/black
-    rev: 23.3.0
+    - id: isort
+
+-   repo: https://github.com/ambv/black
+    rev: stable
     hooks:
-    -   id: black
--   repo: https://github.com/pylint-dev/pylint
-    rev: 2.17.4
+    - id: black
+      language_version: python3.10
+
+-   repo: https://github.com/pycqa/flake8
+    rev: 6.0.0
     hooks:
-    -  id: pylint
--   repo: https://github.com/fpgmaas/deptry
-    rev: 0.11.0
+    -   id: flake8
+        additional_dependencies: [pep8-naming, flake8-comments]
+
+-   repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.3.0
     hooks:
-    -  id: deptry
+    -   id: mypy
+        additional_dependencies: []

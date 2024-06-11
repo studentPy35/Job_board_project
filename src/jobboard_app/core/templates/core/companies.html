@@ -8,7 +8,7 @@
         </tr>
         {% for company in companies_list %}
         <tr>
-            <td>{{ company.name }}</td>
+            <td><a href = "{% url 'company' company.id %}" target = "_self">{{ company.name }}</a></td>
             <td>{{ company.vacancies }}</td>
         </tr>
         {% endfor %}

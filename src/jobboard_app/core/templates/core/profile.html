@@ -1,0 +1,67 @@
+{% extends "core/base.html" %}
+{% block content %}
+    <h3>User information</h3>
+
+    {% if user.photo %}
+        <p>{{ user.photo }}</p>
+    {% endif %}
+
+    <p> <b>Status:</b> {{ user.status }}</p>
+    <p><b>Name:</b> {{ user.name }}</p>
+
+    {% if user.photo %}
+    <p><b>Surname:</b> {{ user.surname }}</p>
+    {% endif %}
+
+    <p><b>Email:</b> {{ user.email }}</p>
+
+    {% if user.photo %}
+    <p><b>Phone number:</b> {{ user.phone }}</p>
+    {% endif %}
+
+    <p><b>Age:</b> {{ user.age }}</p>
+    <p><b>Gender:</b> {{ user.gender }}</p>
+    <p><b>City:</b> {{ user.city }}</p>
+    <p><b>Country:</b> {{ user.country }}</p>
+    <p><b>Experience description:</b> {{ user.experience_description }}</p>
+    <p><b>linkedin:</b> {{ user.linkedin }}</p>
+    <p><b>github:</b> {{ user.github }}</p>
+    <p><b>Experience:</b> {{ user.experience }} years</p>
+
+    {% if user.photo %}
+    <p><b>Resume:</b> {{ user.resume }}</p>
+    {% endif %}
+
+    <p><b>Work formats:</b></p>
+    {% for format in user.work_format %}
+        <ul>{{ format }}</ul>
+    {% endfor %}
+
+    <p><b>Position level:</b> {{ user.position_level }}</p>
+
+    <p><b>Job application formats:</b></p>
+    {% for format in user.job_application_format %}
+        <ul>{{ format }}</ul>
+    {% endfor %}
+
+    <p><b>Languages:</b></p>
+    {% for language in user.language_level %}
+        <ul>{{ language.language }} - {{ language.level }}</ul>
+    {% endfor %}
+
+    <p><b>Tags:</b></p>
+    {% for tag in user.tags %}
+    <ul>{{ tag }}</ul>
+    {% endfor %}
+
+    {% if not vacancy.salary_min and vacancy.salary_max %}
+        <p><b>Salary:</b> up to {{ vacancy.salary_max }}</p>
+    {% elif vacancy.salary_min and not vacancy.salary_max %}
+        <p><b>Salary:</b> from {{ vacancy.salary_min }}</p>
+    {% elif vacancy.salary_min and vacancy.salary_max %}
+        <p><b>Salary:</b> {{ vacancy.salary_min }} - {{ vacancy.salary_max }}</p>
+    {% elif not vacancy.salary_min and not vacancy.salary_max %}
+        <p><b>Salary:</b> not specified</p>
+    {% endif %}
+
+{% endblock content %}
